@@ -80,29 +80,33 @@ function makeDetailMessageAndReadme(data) {
     problem_description, problem_input, problem_output,
     code, language, memory, runtime } = data;
 
-  const directory = `백준/${level.replace(/ .*/, '')}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
+  const lang = languages[language];
+  const langType = languageTypes[lang] || 'other'
+  const directory = `codes/boj/${langType}`
+  // const directory = `백준/${level.replace(/ .*/, '')}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
   const message = `[${level}] Title: ${title}, Time: ${runtime} ms, Memory: ${memory} KB -BaekjoonHub`;
   const tagl = [];
   tags.forEach((tag) => tagl.push(`${categories[tag.key]}(${tag.key})`));
   const category = tagl.join(', ');
-  const fileName = `${convertSingleCharToDoubleChar(title)}.${languages[language]}`;
+  const fileName = `${problemId}번 ${convertSingleCharToDoubleChar(title)}.${lang}`
+  // const fileName = `${convertSingleCharToDoubleChar(title)}.${languages[language]}`;
   // prettier-ignore-start
-  const readme = `# [${level}] ${title} - ${problemId} \n\n`
-    + `[문제 링크](https://www.acmicpc.net/problem/${problemId}) \n\n`
-    + `### 성능 요약\n\n`
-    + `메모리: ${memory} KB, `
-    + `시간: ${runtime} ms\n\n`
-    + `### 분류\n\n`
-    + `${category || "Empty"}\n\n` + (!!problem_description ? ''
-      + `### 문제 설명\n\n${problem_description}\n\n`
-      + `### 입력 \n\n ${problem_input}\n\n`
-      + `### 출력 \n\n ${problem_output}\n\n` : '');
+  // const readme = `# [${level}] ${title} - ${problemId} \n\n`
+  //   + `[문제 링크](https://www.acmicpc.net/problem/${problemId}) \n\n`
+  //   + `### 성능 요약\n\n`
+  //   + `메모리: ${memory} KB, `
+  //   + `시간: ${runtime} ms\n\n`
+  //   + `### 분류\n\n`
+  //   + `${category || "Empty"}\n\n` + (!!problem_description ? ''
+  //     + `### 문제 설명\n\n${problem_description}\n\n`
+  //     + `### 입력 \n\n ${problem_input}\n\n`
+  //     + `### 출력 \n\n ${problem_output}\n\n` : '');
   // prettier-ignore-end
   return {
     directory,
     fileName,
     message,
-    readme,
+    readme: 'nothings',
     code
   };
 }

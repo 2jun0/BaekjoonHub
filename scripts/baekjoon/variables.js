@@ -119,6 +119,10 @@
     "Whitespace": "ws"
 }
 
+const languageTypes = {
+    "py": "python"
+}
+
 // // If a new language is added, perform the update manually using the script below.
 // // parsing all languages on https://help.acmicpc.net/language/info/all
 // [...document.querySelectorAll('div.card')]

@@ -15,7 +15,7 @@ async function uploadOneSolveProblemOnGit(bojData, cb) {
     console.error('token or hook is null', token, hook);
     return;
   }
-  return upload(token, hook, bojData.code, bojData.readme, bojData.directory, bojData.fileName, bojData.message, cb);
+  return upload(token, hook, bojData.code, null, bojData.directory, bojData.fileName, bojData.message, cb);
 }
 
 /** Github api를 사용하여 업로드를 합니다.
@@ -40,14 +40,14 @@ async function upload(token, hook, sourceText, readmeText, directory, filename, 
   }
   const { refSHA, ref } = await git.getReference(default_branch);
   const source = await git.createBlob(sourceText, `${directory}/${filename}`); // 소스코드 파일
-  const readme = await git.createBlob(readmeText, `${directory}/README.md`); // readme 파일
-  const treeSHA = await git.createTree(refSHA, [source, readme]);
+  //const readme = await git.createBlob(readmeText, `${directory}/README.md`); // readme 파일
+  const treeSHA = await git.createTree(refSHA, [source]);
   const commitSHA = await git.createCommit(commitMessage, treeSHA, refSHA);
   await git.updateHead(ref, commitSHA);
 
   /* stats의 값을 갱신합니다. */
   updateObjectDatafromPath(stats.submission, `${hook}/${source.path}`, source.sha);
-  updateObjectDatafromPath(stats.submission, `${hook}/${readme.path}`, readme.sha);
+  //updateObjectDatafromPath(stats.submission, `${hook}/${readme.path}`, readme.sha);
   await saveStats(stats);
   // 콜백 함수 실행
   if (typeof cb === 'function') cb();
@@ -93,10 +93,10 @@ async function uploadAllSolvedProblem() {
   }
   setMultiLoaderDenom(bojDatas.length);
   await asyncPool(2, bojDatas, async (bojData) => {
-    if (!isEmpty(bojData.code) && !isEmpty(bojData.readme)) {
+    if (!isEmpty(bojData.code)) {//&& !isEmpty(bojData.readme)) {
       const source = await git.createBlob(bojData.code, `${bojData.directory}/${bojData.fileName}`); // 소스코드 파일
-      const readme = await git.createBlob(bojData.readme, `${bojData.directory}/README.md`); // readme 파일
-      tree_items.push(...[source, readme]);
+      //const readme = await git.createBlob(bojData.readme, `${bojData.directory}/README.md`); // readme 파일
+      tree_items.push(...[source]);
     }
     incMultiLoader(1);
   });
@@ -131,7 +131,7 @@ async function downloadAllSolvedProblem() {
             if (isNull(bojData)) return;
             const folder = zip.folder(bojData.directory);
             folder.file(`${bojData.fileName}`, bojData.code);
-            folder.file('README.md', bojData.readme);
+            // folder.file('README.md', bojData.readme);
             incMultiLoader(1);
           }),
         );
