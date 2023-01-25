@@ -33,11 +33,11 @@ async function upload(token, hook, sourceText, readmeText, directory, filename, 
   /* 업로드 후 커밋 */
   const git = new GitHub(hook, token);
   const stats = await getStats();
-  let default_branch = stats.branches[hook];
-  if (isNull(default_branch)) {
-    default_branch = await git.getDefaultBranchOnRepo();
-    stats.branches[hook] = default_branch;
-  }
+  let default_branch = 'boj';//stats.branches[hook];
+  // if (isNull(default_branch)) {
+  //   default_branch = await git.getDefaultBranchOnRepo();
+  //   stats.branches[hook] = default_branch;
+  // }
   const { refSHA, ref } = await git.getReference(default_branch);
   const source = await git.createBlob(sourceText, `${directory}/${filename}`); // 소스코드 파일
   //const readme = await git.createBlob(readmeText, `${directory}/README.md`); // readme 파일
@@ -64,7 +64,7 @@ async function uploadAllSolvedProblem() {
   const token = await getToken();
   const git = new GitHub(hook, token);
 
-  const default_branch = stats.branches[hook];
+  const default_branch = 'boj';//stats.branches[hook];
   const { refSHA, ref } = await git.getReference(default_branch);
 
   const username = findUsername();

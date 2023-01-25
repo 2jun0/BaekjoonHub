@@ -84,7 +84,8 @@ function makeDetailMessageAndReadme(data) {
   const langType = languageTypes[lang] || 'other'
   const directory = `codes/boj/${langType}`
   // const directory = `백준/${level.replace(/ .*/, '')}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
-  const message = `[${level}] Title: ${title}, Time: ${runtime} ms, Memory: ${memory} KB -BaekjoonHub`;
+  const message = `add: a boj problem ${problemId}:${title}`
+  // const message = `[${level}] Title: ${title}, Time: ${runtime} ms, Memory: ${memory} KB -BaekjoonHub`;
   const tagl = [];
   tags.forEach((tag) => tagl.push(`${categories[tag.key]}(${tag.key})`));
   const category = tagl.join(', ');
