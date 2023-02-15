@@ -118,7 +118,6 @@ function convertSingleCharToDoubleChar(text) {
     '+': '＋',
     ',': '，',
     '-': '－',
-    '.': '．',
     '/': '／',
     ':': '：',
     ';': '；',
