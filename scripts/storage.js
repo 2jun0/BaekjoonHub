@@ -275,7 +275,7 @@ function _programmersRankRemoverFilter(path) {
  * @returns {string} - 공백과 관련된 값을 제거한 문자열
  */
 function _baekjoonSpaceRemoverFilter(path) {
-  return path.replace(/( | |&nbsp|&#160|&#8197|%E2%80%85|%20)/g, '');
+  return path.replace(/( | |&nbsp|&#160|&#8197|%E2%80%85|%20)/g, '');
 }
 
 /**

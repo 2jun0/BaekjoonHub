@@ -136,8 +136,7 @@ function convertSingleCharToDoubleChar(text) {
     '{': '｛',
     '|': '｜',
     '}': '｝',
-    '~': '～',
-    ' ': ' ', // 공백만 전각문자가 아닌 FOUR-PER-EM SPACE로 변환
+    '~': '～'
   };
   return text.replace(/[!%&()*+,\-./:;<=>?@\[\\\]^_`{|}~ ]/g, function (m) {
     return map[m];
