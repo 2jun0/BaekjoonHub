@@ -120,7 +120,8 @@
 }
 
 const languageTypes = {
-    "py": "python"
+    "py": "python",
+    "cc": "c++"
 }
 
 // // If a new language is added, perform the update manually using the script below.

@@ -135,7 +135,7 @@ function convertSingleCharToDoubleChar(text) {
     '{': '｛',
     '|': '｜',
     '}': '｝',
-    '~': '～'
+    '~': '～',
   };
   return text.replace(/[!%&()*+,\-./:;<=>?@\[\\\]^_`{|}~ ]/g, function (m) {
     return map[m];
@@ -257,7 +257,7 @@ function combine(a, b) {
   return a.map((x, i) => ({ ...x, ...b[i] }));
 }
 
-if (typeof __DEV__ !== "undefined") {
-  var exports = (module.exports = {});
+if (typeof __DEV__ !== 'undefined') {
+  const exports = (module.exports = {});
   exports.filter = filter;
 }
