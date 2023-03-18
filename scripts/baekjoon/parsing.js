@@ -49,8 +49,6 @@ function makeDetailMessageAndReadme(data) {
   const langType = languageTypes[lang] || 'other'
   const directory = `codes/boj/${langType}`
   const message = `add: a boj problem ${problemId}:${title}`
-  const tagl = [];
-  tags.forEach((tag) => tagl.push(`${categories[tag.key]}(${tag.key})`));
   const fileName = `${problemId}번 ${title}.${lang}`
   return {
     directory,
